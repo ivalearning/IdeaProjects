@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="7.003" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="Ebay Home Page Scenarios" name="Advanced Search Link" time="6.754">
+<system-out><![CDATA[
+Given I am on Ebay Home Page................................................passed
+When I click on Advanced Link...............................................passed
+Then I navigate to Advanced Search Page.....................................passed
+]]></system-out>
+</testcase>
+</testsuite>

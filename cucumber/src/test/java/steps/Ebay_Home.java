@@ -44,6 +44,33 @@ public class Ebay_Home {
 
     }
 
+    @When("I search for iPhone11")
+    public void i_search_for_i_phone11() {
+        driver.findElement(By.xpath("//*[@id=\"gh-ac\"]")).sendKeys("iPhone11");
+        driver.findElement(By.xpath("//*[@id=\"gh-btn\"]")).click();
+
+        System.out.println("+");
+    }
+    @Then("I validate at least {int} search items present")
+    public void i_validate_at_least_search_items_present(Integer int1) {
+        String itemCount = driver.findElement(By.cssSelector("h1.srp-controls__count-heading>span.BOLD:first-child")).getText().trim();
+        String itemCount2 = itemCount.replace(" ","");
+        int itemCountInt = Integer.parseInt(itemCount2);
+        if(itemCountInt <= 1000) {
+            fail("Less than 1000 results found");
+        }
+
+        System.out.println(itemCountInt);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        driver.quit();
+    }
+
+
+
 
 
 }

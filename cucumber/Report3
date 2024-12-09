@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="8.693" tests="1" skipped="0" failures="0" errors="0">
-<testcase classname="Ebay Home Page Scenarios" name="Search items count" time="8.369">
+<testsuite name="Cucumber" time="12.286" tests="1" skipped="0" failures="1" errors="0">
+<testcase classname="Ebay Home Page Scenarios" name="Get help" time="11.686">
+<failure type="java.lang.AssertionError" message="url do not match">
+<![CDATA[java.lang.AssertionError: url do not match
+	at org.junit.Assert.fail(Assert.java:89)
+	at steps.Ebay_Home.i_navigate_to_napoveda_page(Ebay_Home.java:125)
+	at ✽.I navigate to Napoveda Page(file:///C:/Users/User/IdeaProjects/cucumber/features/Ebay_Home.feature:32)
+]]>
+</failure>
 <system-out><![CDATA[
 Given I am on Ebay Home Page................................................passed
-When I search for iPhone11..................................................passed
-Then I validate at least 1000 search items present..........................passed
+When I click on Napoveda....................................................passed
+Then I navigate to Napoveda Page............................................failed
 ]]></system-out>
 </testcase>
 </testsuite>

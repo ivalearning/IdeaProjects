@@ -7,6 +7,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.*;
 
+import java.util.concurrent.TimeUnit;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.fail;
 
 
@@ -19,6 +22,10 @@ public class Ebay_Home {
         driver = new ChromeDriver();
         driver.get("https://www.ebay.com/");
         System.out.println("from Home page");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(10, SECONDS);
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //WebDriverWait wait = new WebDriverWait(driver,30);
     }
 
     @When("I click on Advanced Link")
@@ -51,6 +58,7 @@ public class Ebay_Home {
 
         System.out.println("+");
     }
+
     @Then("I validate at least {int} search items present")
     public void i_validate_at_least_search_items_present(Integer int1) {
         String itemCount = driver.findElement(By.cssSelector("h1.srp-controls__count-heading>span.BOLD:first-child")).getText().trim();
@@ -70,7 +78,62 @@ public class Ebay_Home {
     }
 
 
+    @When("I click on Mapa Webu")
+    public void i_click_on_mapa_webu() {
+        driver.findElement(By.linkText("Mapa webu")).click();
 
+    }
 
+    @When("I click on Audiobooks")
+    public void i_click_on_audiobooks() {
+        driver.findElement(By.linkText("Audiobooks"));
+        System.out.println("++");
+    }
 
+    @Then("I navigate to Audiobooks catalog")
+    public void i_navigate_to_audiobooks_catalog() {
+        String expUrl = "https://www.ebay.com/b/Audiobooks/29792/bn_317579";
+        String actualUrl = driver.getCurrentUrl();
+        if (!actualUrl.equals(expUrl))
+            fail("other than expected");
 }
+
+    @Then("I can search by Writer")
+    public void i_can_search_by_writer() {
+        System.out.println("4+");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        driver.quit();
+    }
+
+    @When("I click on Napoveda")
+    public void i_click_on_napoveda() {
+        driver.findElement(By.xpath("//*[@id=\"gh-p-3\"]/a")).click();
+        driver.manage().timeouts().pageLoadTimeout(10, SECONDS);
+                System.out.println("+");
+    }
+
+    @Then("I navigate to Napoveda Page")
+    public void i_navigate_to_napoveda_page() {
+        String helpUrl = "https://cz.ebay.de/help/home";
+        String actUrl = driver.getCurrentUrl();
+
+            if(!actUrl.equals(helpUrl))
+                fail("url do not match");
+        driver.quit();
+        System.out.println("+1");
+        }
+
+
+
+
+
+    }
+
+
+
+
+

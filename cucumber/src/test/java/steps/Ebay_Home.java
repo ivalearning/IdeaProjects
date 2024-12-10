@@ -5,8 +5,8 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.*;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -16,10 +16,12 @@ import static org.junit.Assert.fail;
 public class Ebay_Home {
     WebDriver  driver;
 
+    public Ebay_Home(Common_Steps common_steps) {
+        this.driver = common_steps.getDriver();
+    }
+
     @Given("I am on Ebay Home Page")
     public void i_am_on_ebay_home_page()     {
-        System.setProperty("webdriver.chrome.driver", "C:/WebDriver/bin/chromedriver.exe");
-        driver = new ChromeDriver();
         driver.get("https://www.ebay.com/");
         System.out.println("from Home page");
         driver.manage().window().maximize();
@@ -41,47 +43,50 @@ public class Ebay_Home {
         if (!actUrl.equals(expUrl)) {
             fail("Advanced search link not correct ");
         }
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.quit();
         System.out.println("Validation: Page url https://www.ebay.com/sch/ebayadvsearch opened");
 
     }
 
-    @When("I search for iPhone11")
-    public void i_search_for_i_phone11() {
-        driver.findElement(By.xpath("//*[@id=\"gh-ac\"]")).sendKeys("iPhone11");
+    @When("I search for {string}")
+    public void i_search_for(String str1) {
+        driver.findElement(By.xpath("//*[@id=\"gh-ac\"]")).sendKeys(str1);
         driver.findElement(By.xpath("//*[@id=\"gh-btn\"]")).click();
+    }
 
-        System.out.println("+");
+    @When("I search for {string} and {string} in category")
+    public void i_search_for_and_in_category(String string, String string2) {
+        driver.findElement(By.xpath("//*[@id=\"gh-ac\"]")).sendKeys(string);
+        //driver.findElement(By.xpath("//*[@id=\"gh-cat\"]")).click();
+        List<WebElement> cat = driver.findElements(By.xpath("//select[@id='gh-cat']/option"));
+                for(WebElement x : cat) {
+                    if(x.getText().trim().toLowerCase().equals(string2.toLowerCase())) {
+                        x.click();
+                        break;
+                    }
+                }
+
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//*[@id=\"gh-btn\"]")).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+
     }
 
     @Then("I validate at least {int} search items present")
-    public void i_validate_at_least_search_items_present(Integer int1) {
+    public void i_validate_at_least_search_items_present(int count) {
         String itemCount = driver.findElement(By.cssSelector("h1.srp-controls__count-heading>span.BOLD:first-child")).getText().trim();
         String itemCount2 = itemCount.replace(" ","");
         int itemCountInt = Integer.parseInt(itemCount2);
-        if(itemCountInt <= 1000) {
+        if(itemCountInt <= count) {
             fail("Less than 1000 results found");
         }
-
         System.out.println(itemCountInt);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.quit();
     }
 
 
     @When("I click on Mapa Webu")
     public void i_click_on_mapa_webu() {
         driver.findElement(By.linkText("Mapa webu")).click();
-
     }
 
     @When("I click on Audiobooks")
@@ -101,12 +106,6 @@ public class Ebay_Home {
     @Then("I can search by Writer")
     public void i_can_search_by_writer() {
         System.out.println("4+");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.quit();
     }
 
     @When("I click on Napoveda")
@@ -120,16 +119,10 @@ public class Ebay_Home {
     public void i_navigate_to_napoveda_page() {
         String helpUrl = "https://cz.ebay.de/help/home";
         String actUrl = driver.getCurrentUrl();
-
             if(!actUrl.equals(helpUrl))
                 fail("url do not match");
-        driver.quit();
         System.out.println("+1");
         }
-
-
-
-
 
     }
 

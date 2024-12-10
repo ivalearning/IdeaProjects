@@ -12,8 +12,16 @@
   Scenario: Search items count
 
     Given I am on Ebay Home Page
-    When I search for iPhone11
+    When I search for 'iPhone 11'
     Then I validate at least 1000 search items present
+
+  @P6
+    Scenario: Search items count2
+
+      Given I am on Ebay Home Page
+      When I search for 'follet'
+      Then I validate at least 100 search items present
+
 
     @P3
     Scenario: Select category via Map
@@ -37,3 +45,12 @@
       Given I am on Search Help Page
       When I search for Guarantee
       Then I navigate to Query Result Page
+
+    @P7
+    Scenario: Search an item in Category
+
+      Given I am on Ebay Home Page
+      When I search for 'vecere' and 'Knihy a časopisy' in category
+
+
+

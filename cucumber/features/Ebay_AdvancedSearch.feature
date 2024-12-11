@@ -15,3 +15,5 @@ Feature:Ebay Advanced Search Page Scenarios
     When I advanced search an Item
       |keyword|exclude|minprice|maxprice|
       |jazz|audio|0|100|
+
+

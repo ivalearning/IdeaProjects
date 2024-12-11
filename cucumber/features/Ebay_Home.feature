@@ -52,5 +52,17 @@
       Given I am on Ebay Home Page
       When I search for 'vecere' and 'Knihy a časopisy' in category
 
+    @P8
+    Scenario Outline: Home Page Links
+      Given I am on Ebay Home Page
+      When I click on '<link>'
+      Then I validate that page navigate to  '<url>' and title contains '<title>'
+
+      Examples:
+      |link|url|title|
+      |Motors|https://www.ebay.com/b/Auto-Parts-Accessories/6028/bn_569479|Auto Parts|
+      |Fashion|https://www.ebay.com/b/Fashion/bn_7000259856|Fashion|
+      |Sports |https://www.ebay.com/b/Sporting-Goods/888/bn_1865031|Sporting Goods|
+
 
 

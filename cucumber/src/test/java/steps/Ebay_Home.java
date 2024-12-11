@@ -124,6 +124,28 @@ public class Ebay_Home {
         System.out.println("+1");
         }
 
+    @When("I click on {string}")
+    public void i_click_on(String string) {
+        driver.findElement(By.linkText(string)).click();
+        driver.manage().timeouts().pageLoadTimeout(3, SECONDS);
+
+    }
+
+    @Then("I validate that page navigate to  {string} and title contains {string}")
+    public void i_validate_that_page_navigate_to_and_title_contains(String url, String title) {
+        String actUrl = driver.getCurrentUrl();
+        String actTitle = driver.getTitle();
+
+                if(!actUrl.equals(url)) {
+                    fail("url not as expected" + url);
+                }
+                if(!actTitle.contains(title)) {
+                    fail("Title does not contain the string" +title);
+                }
+    }
+
+
+
     }
 
 

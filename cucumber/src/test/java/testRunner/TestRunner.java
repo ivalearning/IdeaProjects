@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "junit:Report3"},  //vystup pouziva Jenkins
         dryRun = false, // true = mel by jen najit scenare, kde nejsou definovane stepy, false = spusti ty, kde jsou vydefinovane stepy
         monochrome = false, // jednobarevne?
-        tags = "@P22"  // tagy se pridavaji do feature souboru k jednotlivym scenarum, asociace napr. @P1 ....... muzu pouzit stejny tag k vice scenarum?
+        tags = "@P8"  // tagy se pridavaji do feature souboru k jednotlivym scenarum, asociace napr. @P1 ....... muzu pouzit stejny tag k vice scenarum?
         //name = {"Search"} // spusti jen scenare ve vsech feature souborech, jejich jmeno obsahuje slovo Search
         )
 public class TestRunner {

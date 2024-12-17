@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 
 public class Ebay_Home {
-    WebDriver  driver;
+    private WebDriver  driver;
 
     public Ebay_Home(Common_Steps common_steps) {
         this.driver = common_steps.getDriver();
@@ -25,6 +25,7 @@ public class Ebay_Home {
         driver.get("https://www.ebay.com/");
         System.out.println("from Home page");
         driver.manage().window().maximize();
+        //Thread.sleep(10000);
         driver.manage().timeouts().pageLoadTimeout(10, SECONDS);
         //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //WebDriverWait wait = new WebDriverWait(driver,30);
@@ -50,7 +51,9 @@ public class Ebay_Home {
     @When("I search for {string}")
     public void i_search_for(String str1) {
         driver.findElement(By.xpath("//*[@id=\"gh-ac\"]")).sendKeys(str1);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@id=\"gh-btn\"]")).click();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @When("I search for {string} and {string} in category")
@@ -70,12 +73,13 @@ public class Ebay_Home {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
 
+
     }
 
     @Then("I validate at least {int} search items present")
     public void i_validate_at_least_search_items_present(int count) {
         String itemCount = driver.findElement(By.cssSelector("h1.srp-controls__count-heading>span.BOLD:first-child")).getText().trim();
-        String itemCount2 = itemCount.replace(" ","");
+        String itemCount2 = itemCount.replace(".","");
         int itemCountInt = Integer.parseInt(itemCount2);
         if(itemCountInt <= count) {
             fail("Less than 1000 results found");

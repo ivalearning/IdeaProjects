@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.Assert.fail;
 
 public class Ebay_AdvancedSearch {
-    WebDriver driver;
+    private WebDriver driver;
 
     public Ebay_AdvancedSearch(Common_Steps common_steps) {
         this.driver = common_steps.getDriver();

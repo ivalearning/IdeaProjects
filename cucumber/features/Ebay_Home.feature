@@ -15,7 +15,7 @@
     When I search for 'iPhone 11'
     Then I validate at least 1000 search items present
 
-  @P6
+  @P6 @setCookies @TestAfterHook @P1
     Scenario: Search items count2
 
       Given I am on Ebay Home Page

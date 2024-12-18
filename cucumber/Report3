@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="14.227" tests="1" skipped="0" failures="0" errors="0">
-<testcase classname="Ebay Home Page Scenarios" name="Search items count2" time="13.962">
+<testsuite name="Cucumber" time="11.654" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="Ebay Home Page Scenarios" name="Search items count" time="11.393">
 <system-out><![CDATA[
 Given I am on Ebay Home Page................................................passed
-When I search for 'follet'..................................................passed
-Then I validate at least 100 search items present...........................passed
+When I search for 'iPhone 11'...............................................passed
+Then I validate at least 1000 search items present..........................passed
 ]]></system-out>
 </testcase>
 </testsuite>
